@@ -24,3 +24,17 @@ class Player:
             self.current_location = self.current_location.w_to
             return True
         return False
+
+    def take(self, item):
+        if item in self.current_location.items:
+            self.items.append(item)
+            self.current_location.items.remove(item)
+            return True
+        return False
+
+    def drop(self, item):
+        if item in self.items:
+            self.items.remove(item)
+            self.current_location.items.remove(item)
+            return True
+        return False
