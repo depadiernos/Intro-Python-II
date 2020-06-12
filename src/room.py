@@ -9,6 +9,7 @@ class Room:
         self.e_to = None
         self.s_to = None
         self.w_to = None
+        self.items = []
 
-    def __str__():
-        print(f'This is {self.name}. {description}')
+    def __str__(self):
+        print(f'This is {self.name}. {self.description}')

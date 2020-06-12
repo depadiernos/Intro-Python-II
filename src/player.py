@@ -5,8 +5,10 @@ class Player:
     def __init__(self, name, current_location):
         self.name = name
         self.current_location = current_location
+        self.items = []
+
     def __str__(self):
-        print(f'This is {self.name}. They are currently standing {location}')
+        print(f'This is {self.name}. They are currently standing {self.current_location}')
     
     def move_to(self, direction):
         if direction == 'n' and self.current_location.n_to != None:
