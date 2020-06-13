@@ -11,5 +11,8 @@ class Room:
         self.w_to = None
         self.items = []
 
+    def list_items(self):
+        return ', '.join(str(item.name) for item in self.items)
+
     def __str__(self):
-        print(f'This is {self.name}. {self.description}')
+        print(f'This is {self.name}. {self.description}. There is something in here: {self.list_items()}')
