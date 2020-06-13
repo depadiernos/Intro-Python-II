@@ -32,12 +32,18 @@ def mud():
     Type "(l)ook" to check room for items.
     Type "(q)uit" to exit''')
 
+
+    def look_around():
+        return f"You are in {player.current_location.name}. There is something here: {player.current_location.list_items()}"
+
+    print(look_around())
+
     while True:
         command = input('What do you want to do? ').lower().split(' ')
-        verb = command[0]
+        verb = command[0].lower()
         obj = None
         if len(command) > 1:
-            obj = command[1]
+            obj = command[1].lower()
 
         # Quit command
         if verb == 'quit' or verb == 'q':
@@ -50,24 +56,24 @@ def mud():
             try:
                 success = player.move_to(is_movement['message'])
                 if success == True:
-                    print(f'You moved to {player.current_location.name}.')
+                    print(look_around())
                 elif success == False:
                     print(f"You can't go there!")
             except ValueError:
                 print("Something went wrong!")
                 continue
+
+        # Get/Take command
         is_get = init.is_get(verb, obj)
         if is_get['status'] == True:
             try:
                 if is_get['message'] != None:
                     print(is_get['message'])
                 else:
-                    if is_get == True:
-                        item = [
-                            item for item in player.items if item.name == obj]
-                        success = player.take(item)
-                        if success == True:
-                            print(f"You picked up {item.name}")
+                    item = [item for item in player.current_location.items if item.name.lower() == obj]
+                    success = player.take(item[0])
+                    if success == True:
+                        print(f"You picked up {item[0].name}")
             except ValueError:
                 print("Something went wrong!")
                 continue
